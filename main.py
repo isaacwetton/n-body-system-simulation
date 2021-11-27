@@ -20,3 +20,5 @@ while command != "exit":
         command = input("")
     cmd.run_cmd(command)
     command = input("")
+
+exit()
