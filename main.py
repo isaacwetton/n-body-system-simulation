@@ -14,7 +14,7 @@ print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
 command = input("")
 
 # Check for valid command
-while command is not "exit":
+while command != "exit":
     while command not in COMMANDS:
         print("That is not a valid command. Type 'help' for a list of commands.")
         command = input("")
