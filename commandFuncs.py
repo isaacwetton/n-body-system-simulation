@@ -6,7 +6,7 @@ def run_cmd(command):
     elif command == 'del':
 
     elif command == 'plot':
-        
+
 
 # Console error message if script is run directly
 if __name__ == "__main__":

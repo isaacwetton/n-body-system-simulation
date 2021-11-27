@@ -18,3 +18,5 @@ while command is not "exit":
     while command not in COMMANDS:
         print("That is not a valid command. Type 'help' for a list of commands.")
         command = input("")
+    cmd.run_cmd(command)
+    command = input("")
