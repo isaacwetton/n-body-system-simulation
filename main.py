@@ -16,8 +16,12 @@ command = input("")
 # Check for valid command
 while command != "exit":
     while command not in COMMANDS:
+        if command == "exit":
+            break
         print("That is not a valid command. Type 'help' for a list of commands.")
         command = input("")
+    if command == "exit":
+        break
     cmd.run_cmd(command)
     command = input("")
 
