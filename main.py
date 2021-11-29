@@ -5,6 +5,11 @@ import commandFuncs as cmd
 
 # Define list of commands
 COMMANDS = ["help", "add", "del", "plot"]
+
+# Initialise system
+sun = Particle(name="Sun")
+earth = Particle(name="Earth")
+
 # Print welcome message
 print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
       "The program initially has the Sun and Earth as the only objects.\n\n"

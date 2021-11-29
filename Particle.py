@@ -14,7 +14,7 @@ class Particle:
             self,
             position=np.array([0, 0, 0], dtype=float),
             velocity=np.array([0, 0, 0], dtype=float),
-            acceleration=np.array([0, -10, 0], dtype=float),
+            acceleration=np.array([0, 0, 0], dtype=float),
             name='Ball',
             mass=1.0
     ):
