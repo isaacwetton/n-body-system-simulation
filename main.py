@@ -1,4 +1,4 @@
-# Import modules and functions
+# Import modules, constants and functions
 from Particle import *
 import numpy as np
 import commandFuncs as cmd
