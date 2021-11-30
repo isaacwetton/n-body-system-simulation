@@ -10,9 +10,13 @@ COMMANDS = ["help", "add", "del", "plot"]
 # Define original time (constant)
 T0 = Time("2021-11-28 00:00:00.0", scale="tdb")
 
+# Create list of particles
+particles = []
+
 # Initialise system
 sun = Particle(name="Sun")
 earth = Particle(name="Earth")
+particles.append([sun, earth])
 
 # Print welcome message
 print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
