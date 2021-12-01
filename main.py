@@ -28,7 +28,7 @@ def run_cmd(command):
                   "mass, position and velocity for a custom particle.")
         elif command[:4] == 'add ':
             particle = command[4:]
-            cmd.add_particle(particle)
+            cmd.add_particle(particle, T0)
     elif command == 'del':
         print("")
     elif command == 'plot':
