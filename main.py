@@ -8,6 +8,7 @@ from spiceypy import sxform, mxvg
 from poliastro import constants
 from astropy.constants import G
 
+
 def run_cmd(command):
     if command == 'help' or command[:5] == 'help ':
         print("The following is a list of valid commands with descriptions.\n\n"
@@ -22,7 +23,7 @@ def run_cmd(command):
               "\t\t\t\t\t\t\tThe program runs for a total of <iterations> iterations (integer value).")
     elif command[:3] == 'add':
         if command == 'add':
-            print("Usage of 'add': Adds the specified particle to the simulation. Valid particles are: "
+            print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
                   "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
                   "If you specify the particle as 'custom', you can specify "
                   "mass, position and velocity for a custom particle.")
@@ -32,15 +33,21 @@ def run_cmd(command):
                             'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'custom'):
                 particle_obj = cmd.add_particle(particle, T0)
                 particles[particle_obj.name] = particle_obj
-                print(particles) # test
+                print(particles)  # test
             else:
                 print("Invalid particle.")
-                print("Usage of 'add': Adds the specified particle to the simulation. Valid particles are: "
+                print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
                       "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
                       "If you specify the particle as 'custom', you can specify "
                       "mass, position and velocity for a custom particle.")
-    elif command == 'del':
-        print("")
+    elif command[:3] == 'del':
+        if command == 'del':
+            print("Usage of 'del <particle>': Deletes an existing particle. If a particle is not specified, "
+                  "the list of current particles will be printed.")
+        elif command[:4] == 'del ':
+            particle = command[4:]
+            cmd.del_particle(particle, particles)
+
     elif command == 'plot':
         print("")
 

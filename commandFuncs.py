@@ -49,6 +49,14 @@ def add_particle(particle, t):
         vel = [float(vel_str[0]), float(vel_str[1]), float(vel_str[2])]
     return Particle(name=particle, mass=particle_mass, position=pos, velocity=vel)
 
+def del_particle(particle, particle_dict):
+    if particle in particle_dict.keys():
+        particle_dict.pop(particle, None)
+        print("Particle '" + particle + "' successfully deleted.")
+    else:
+        print("Particle '" + particle + "' does not exist.")
+
+
 # Define masses
 mass = {
     'sun': (constants.GM_sun / G).value,
