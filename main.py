@@ -70,7 +70,7 @@ command = input("")
 
 # Check for valid command
 while command != "exit":
-    while command not in COMMANDS:
+    while command[:4] not in COMMANDS and command[:3] not in COMMANDS:
         if command == "exit":
             break
         print("That is not a valid command. Type 'help' for a list of commands.")
