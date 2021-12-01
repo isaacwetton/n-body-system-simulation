@@ -32,7 +32,7 @@ def add_particle(particle, t):
 
         # retrieve correct mass
         particle_mass = mass[particle]
-        
+
 # Define masses
 mass = {
     'sun': (constants.GM_sun / G).value,
