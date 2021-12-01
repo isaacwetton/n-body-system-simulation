@@ -8,6 +8,33 @@ from spiceypy import sxform, mxvg
 from poliastro import constants
 from astropy.constants import G
 
+def run_cmd(command):
+    if command == 'help' or command[:5] == 'help ':
+        print("The following is a list of valid commands with descriptions.\n\n"
+              "add <particle>:\t\t\t\tAdds the specified particle to the simulation. Valid particles are: "
+              "mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+              "\t\t\t\t\t\t\tIf you specify the particle as 'custom', you can specify "
+              "mass, position and velocity for a custom particle.\n"
+              "del <particle>:\t\t\t\tDeletes an existing particle. If a particle is not specified, "
+              "the list of current particles will be printed.\n"
+              "plot <deltaT> <iterations>:\tGenerates a plot of the current system, generating new "
+              "position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
+              "\t\t\t\t\t\t\tThe program runs for a total of <iterations> iterations (integer value).")
+    elif command[:3] == 'add':
+        if command == 'add':
+            print("Usage of 'add': Adds the specified particle to the simulation. Valid particles are: "
+                  "mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+                  "If you specify the particle as 'custom', you can specify"
+                  "mass, position and velocity for a custom particle.")
+        elif command[:4] == 'add ':
+            particle = command[4:]
+            cmd.add_particle(particle)
+    elif command == 'del':
+        print("")
+    elif command == 'plot':
+        print("")
+
+
 # Define list of commands
 COMMANDS = ("help", "add", "del", "plot")
 
@@ -77,7 +104,7 @@ while command != "exit":
         command = input("")
     if command == "exit":
         break
-    cmd.run_cmd(command)
+    run_cmd(command)
     command = input("")
 
 exit()
