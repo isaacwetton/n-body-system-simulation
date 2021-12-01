@@ -6,6 +6,8 @@ from poliastro import constants
 from astropy.constants import G
 
 def add_particle(particle, t):
+    if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
+                    'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
         # Retrieve initial position and velocity
         pos, vel = get_body_barycentric_posvel("sun", t, ephemeris="jpl")
 
@@ -30,6 +32,22 @@ def add_particle(particle, t):
 
         # retrieve correct mass
         particle_mass = mass[particle]
+    elif particle == 'custom':
+        print('What is the name of the object?')
+        particle = input('')
+        while particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
+                           'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
+            print('Invalid name. Enter a valid particle name:')
+            particle = input('')
+        print("What is the mass of the particle (kg)?")
+        particle_mass = float(input(''))
+        print('What is the initial position vector (in form x,y,z)?')
+        pos_str = input('').split(',')
+        pos = [float(pos_str[0]), float(pos_str[1]), float(pos_str[2])]
+        print('What is the initial velocity vector (in form x,y,z)?')
+        vel_str = input('').split(',')
+        vel = [float(vel_str[0]), float(vel_str[1]), float(vel_str[2])]
+    return Particle(name=particle, mass=particle_mass, position=pos, velocity=vel)
 
 # Define masses
 mass = {
