@@ -9,7 +9,7 @@ from poliastro import constants
 from astropy.constants import G
 
 # Define list of commands
-COMMANDS = ["help", "add", "del", "plot"]
+COMMANDS = ("help", "add", "del", "plot")
 
 # Define original time (constant)
 T0 = Time("2021-11-28 00:00:00.0", scale="tdb")
