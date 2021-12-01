@@ -12,7 +12,7 @@ def run_cmd(command):
     if command == 'help' or command[:5] == 'help ':
         print("The following is a list of valid commands with descriptions.\n\n"
               "add <particle>:\t\t\t\tAdds the specified particle to the simulation. Valid particles are: "
-              "mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+              "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
               "\t\t\t\t\t\t\tIf you specify the particle as 'custom', you can specify "
               "mass, position and velocity for a custom particle.\n"
               "del <particle>:\t\t\t\tDeletes an existing particle. If a particle is not specified, "
@@ -23,12 +23,21 @@ def run_cmd(command):
     elif command[:3] == 'add':
         if command == 'add':
             print("Usage of 'add': Adds the specified particle to the simulation. Valid particles are: "
-                  "mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+                  "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
                   "If you specify the particle as 'custom', you can specify"
                   "mass, position and velocity for a custom particle.")
         elif command[:4] == 'add ':
             particle = command[4:]
-            cmd.add_particle(particle, T0)
+            if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
+                            'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
+                cmd.add_particle(particle, T0)
+                particles.append(particle)
+            else:
+                print("Invalid particle.")
+                print("Usage of 'add': Adds the specified particle to the simulation. Valid particles are: "
+                      "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+                      "If you specify the particle as 'custom', you can specify"
+                      "mass, position and velocity for a custom particle.")
     elif command == 'del':
         print("")
     elif command == 'plot':
