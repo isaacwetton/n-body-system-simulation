@@ -5,6 +5,7 @@ from spiceypy import sxform, mxvg
 from poliastro import constants
 from astropy.constants import G
 
+
 def add_particle(particle, t):
     if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
                     'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
@@ -49,12 +50,17 @@ def add_particle(particle, t):
         vel = [float(vel_str[0]), float(vel_str[1]), float(vel_str[2])]
     return Particle(name=particle, mass=particle_mass, position=pos, velocity=vel)
 
+
 def del_particle(particle, particle_dict):
     if particle in particle_dict.keys():
         particle_dict.pop(particle, None)
         print("Particle '" + particle + "' successfully deleted.")
     else:
         print("Particle '" + particle + "' does not exist.")
+
+
+def plot_system(deltaT, N):
+    print("")
 
 
 # Define masses
