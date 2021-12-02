@@ -4,6 +4,7 @@ from astropy.coordinates import get_body_barycentric_posvel
 from spiceypy import sxform, mxvg
 from poliastro import constants
 from astropy.constants import G
+import systemEvolution as evolve
 
 
 def add_particle(particle, t):
@@ -59,9 +60,12 @@ def del_particle(particle, particle_dict):
         print("Particle '" + particle + "' does not exist.")
 
 
-def plot_system(deltaT, N):
-    print("")
-
+def plot_system(deltaT, N, particle_dict):
+    particle_dict_copy = particle_dict.copy()
+    for particle in particle_dict.values():
+        # print(particle.position + "," + particle.velocity)  # test
+        particle.position, particle.velocity = evolve.evolve_posvel(particle, deltaT, N, particle_dict_copy)
+        # print(particle.position + "," + particle.velocity)  # test
 
 # Define masses
 mass = {
