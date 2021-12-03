@@ -63,7 +63,7 @@ def del_particle(particle, particle_dict):
 def plot_system(deltaT, N, particle_dict):
     particle_dict_copy = particle_dict.copy()
     for particle in particle_dict.values():
-        # print(particle.position + "," + particle.velocity)  # test
+        # print(str(particle.position) + "," + str(particle.velocity))  # test
         particle.position, particle.velocity = evolve.evolve_posvel(particle, deltaT, N, particle_dict_copy)
         # print(particle.position + "," + particle.velocity)  # test
 
