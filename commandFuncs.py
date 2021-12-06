@@ -11,7 +11,7 @@ def add_particle(particle, t):
     if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
                     'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
         # Retrieve initial position and velocity
-        pos, vel = get_body_barycentric_posvel("sun", t, ephemeris="jpl")
+        pos, vel = get_body_barycentric_posvel(particle, t, ephemeris="jpl")
 
         statevec = [
             pos.xyz[0].to("m").value,

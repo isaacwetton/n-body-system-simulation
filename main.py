@@ -52,7 +52,6 @@ def run_cmd(command):
     elif command == 'plot':
         cmd.plot_system(5, 200000, particles)
 
-
 # Define list of commands
 COMMANDS = ("help", "add", "del", "plot")
 
