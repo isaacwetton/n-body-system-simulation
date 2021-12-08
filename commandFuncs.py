@@ -5,7 +5,7 @@ from spiceypy import sxform, mxvg
 from poliastro import constants
 from astropy.constants import G
 import systemEvolution as evolve
-
+from matplotlib import pyplot as plt
 
 def add_particle(particle, t):
     if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
@@ -64,8 +64,10 @@ def plot_system(deltaT, N, particle_dict):
     particle_dict_copy = particle_dict.copy()
     for particle in particle_dict.values():
         # print(str(particle.position) + "," + str(particle.velocity))  # test
-        particle.position, particle.velocity = evolve.evolve_posvel(particle, deltaT, N, particle_dict_copy)
+        x, y = evolve.evolve_posvel(particle, deltaT, N, particle_dict_copy)
         # print(particle.position + "," + particle.velocity)  # test
+        plt.plot(x, y)
+    plt.show()
 
 # Define masses
 mass = {
