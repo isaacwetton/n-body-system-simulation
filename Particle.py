@@ -49,7 +49,7 @@ class Particle:
         normalised_sep = (self.position - body.position) / sep
         grav_accel_mag = -(body.G * body.mass) / (sep**2)
         grav_accel = grav_accel_mag * normalised_sep
-        self.acceleration = grav_accel
+        return grav_accel
 
     def kineticEnergy(self):
         return 0.5 * self.mass * (np.linalg.norm(self.velocity))**2

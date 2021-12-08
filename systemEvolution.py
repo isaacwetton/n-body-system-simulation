@@ -13,8 +13,10 @@ def evolve_posvel(particle, deltaT, N, particle_dict):
     x = []
     y = []
     for i in range(N):
+        accel = np.array([0, 0, 0], dtype=float)
         for object in dict_wo_particle.values():
-            particle.updateGravitationalAcceleration(object)
+            accel += particle.updateGravitationalAcceleration(object)
+        particle.acceleration = accel
         particle.update(deltaT)
         time += deltaT
         x.append(particle.position[0])
