@@ -66,7 +66,8 @@ def plot_system(deltaT, N, particle_dict):
         # print(str(particle.position) + "," + str(particle.velocity))  # test
         x, y = evolve.evolve_posvel(particle, deltaT, N, particle_dict_copy)
         # print(particle.position + "," + particle.velocity)  # test
-        plt.plot(x, y)
+        plt.plot(x, y, label=particle.name)
+    plt.legend()
     plt.show()
 
 # Define masses

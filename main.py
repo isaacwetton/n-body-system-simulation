@@ -50,7 +50,7 @@ def run_cmd(command):
             cmd.del_particle(particle, particles)
 
     elif command == 'plot':
-        cmd.plot_system(1000, 20000, particles)
+        cmd.plot_system(1000, 400000, particles)
 
 # Define list of commands
 COMMANDS = ("help", "add", "del", "plot")
