@@ -8,7 +8,7 @@ import systemEvolution as evolve
 from matplotlib import pyplot as plt
 
 def add_particle(particle, t):
-    if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
+    if particle in ('sun', 'mercury', 'venus', 'earth', 'mars',
                     'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
         # Retrieve initial position and velocity
         pos, vel = get_body_barycentric_posvel(particle, t, ephemeris="jpl")
@@ -37,7 +37,7 @@ def add_particle(particle, t):
     elif particle == 'custom':
         print('What is the name of the object?')
         particle = input('')
-        while particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
+        while particle in ('sun', 'mercury', 'venus', 'earth', 'mars',
                            'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
             print('Invalid name. Enter a valid particle name:')
             particle = input('')
@@ -75,7 +75,6 @@ mass = {
     'mercury': (constants.GM_mercury / G).value,
     'venus': (constants.GM_venus / G).value,
     'earth': (constants.GM_earth / G).value,
-    'moon': (constants.GM_moon / G).value,
     'mars': (constants.GM_mars / G).value,
     'jupiter': (constants.GM_jupiter / G).value,
     'saturn': (constants.GM_saturn / G).value,

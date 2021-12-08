@@ -24,12 +24,12 @@ def run_cmd(command):
     elif command[:3] == 'add':
         if command == 'add':
             print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
-                  "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+                  "sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto\n"
                   "If you specify the particle as 'custom', you can specify "
                   "mass, position and velocity for a custom particle.")
         elif command[:4] == 'add ':
             particle = command[4:]
-            if particle in ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
+            if particle in ('sun', 'mercury', 'venus', 'earth', 'mars',
                             'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'custom'):
                 particle_obj = cmd.add_particle(particle, T0)
                 particles[particle_obj.name] = particle_obj
@@ -38,7 +38,7 @@ def run_cmd(command):
             else:
                 print("Invalid particle.")
                 print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
-                      "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
+                      "sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto\n"
                       "If you specify the particle as 'custom', you can specify "
                       "mass, position and velocity for a custom particle.")
     elif command[:3] == 'del':
@@ -50,7 +50,7 @@ def run_cmd(command):
             cmd.del_particle(particle, particles)
 
     elif command == 'plot':
-        cmd.plot_system(400, 200000, particles)
+        cmd.plot_system(1000, 20000, particles)
 
 # Define list of commands
 COMMANDS = ("help", "add", "del", "plot")
