@@ -54,6 +54,9 @@ class Particle:
     def kineticEnergy(self):
         return 0.5 * self.mass * (np.linalg.norm(self.velocity))**2
 
+    def potentialEnergy(self, body):
+        sep = np.linalg.norm(self.position - body.position)
+        return -(body.G * body.mass) / sep
 
 # Console error message if script is run directly
 if __name__ == "__main__":
