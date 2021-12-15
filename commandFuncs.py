@@ -61,14 +61,34 @@ def del_particle(particle, particle_dict):
 
 
 def plot_system(deltaT, N, m, particle_dict):
-    particle_dict_copy = particle_dict.copy()
-    for particle in particle_dict.values():
-        # print(str(particle.position) + "," + str(particle.velocity))  # test
-        x, y = evolve.evolve_posvel(particle, deltaT, N, m, particle_dict_copy)
-        # print(particle.position + "," + particle.velocity)  # test
-        plt.plot(x, y, label=particle.name)
+    # particle_dict_copy = particle_dict.copy()
+    # for particle in particle_dict.values():
+    #     # print(str(particle.position) + "," + str(particle.velocity))  # test
+    #     x, y = evolve.evolve_posvel(particle, deltaT, N, m, particle_dict_copy)
+    #     # print(particle.position + "," + particle.velocity)  # test
+    #     plt.plot(x, y, label=particle.name)
+    # plt.legend()
+    # plt.show()
+
+    # Initialise Dictionaries
+    x_values = {}
+    y_values = {}
+    for name in particle_dict.keys():
+        x_values[name] = []
+        y_values[name] = []
+
+    for i in range(N):
+        particle_dict_copy = particle_dict.copy()
+        for particle in particle_dict.values():
+            x, y = evolve.evolve_posvel(particle, deltaT, m, particle_dict_copy)
+            x_values[particle.name].append(x)
+            y_values[particle.name].append(y)
+            particle_dict[particle.name] = particle
+    for name in particle_dict.keys():
+        plt.plot(x_values[name], y_values[name], label=name)
     plt.legend()
     plt.show()
+
 
 # Define masses
 mass = {

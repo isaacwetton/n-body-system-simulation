@@ -1,8 +1,7 @@
 from Particle import *
 
 
-def evolve_posvel(particle, deltaT, N, m, particle_dict):
-    time = 0
+def evolve_posvel(particle, deltaT, m, particle_dict):
 
     # Define new dictionary without original particle
 
@@ -13,22 +12,18 @@ def evolve_posvel(particle, deltaT, N, m, particle_dict):
 
     x = []
     y = []
-    for i in range(N):
-        accel = np.array([0, 0, 0], dtype=float)
-        for object in dict_wo_particle.values():
-            accel += particle.updateGravitationalAcceleration(object)
-        particle.acceleration = accel
+    accel = np.array([0, 0, 0], dtype=float)
+    for obj in dict_wo_particle.values():
+        accel += particle.updateGravitationalAcceleration(obj)
+    particle.acceleration = accel
 
-        # Update based on chosen method
-        if m == "Euler":
-            particle.update_euler(deltaT)
-        elif m == "EulerCromer":
-            particle.update_eulerCromer(deltaT)
+    # Update based on chosen method
+    if m == "Euler":
+        particle.update_euler(deltaT)
+    elif m == "EulerCromer":
+        particle.update_eulerCromer(deltaT)
 
-        time += deltaT
-        x.append(particle.position[0])
-        y.append(particle.position[1])
-    return x, y
+    return particle.position[0], particle.position[1]
 
 def evolve_energy(particle, deltaT, N, m, particle_dict, n):
     time = 0
