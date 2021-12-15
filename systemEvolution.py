@@ -9,8 +9,6 @@ def evolve_posvel(particle, deltaT, m, particle_dict):
         if particle_dict[x] != particle:
             dict_wo_particle[x] = particle_dict[x]
 
-    x = []
-    y = []
     accel = np.array([0, 0, 0], dtype=float)
     for obj in dict_wo_particle.values():
         accel += particle.updateGravitationalAcceleration(obj)
