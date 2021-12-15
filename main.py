@@ -20,9 +20,10 @@ def run_cmd(command):
               "mass, position and velocity for a custom particle.\n"
               "del <particle>:\t\t\t\tDeletes an existing particle. If a particle is not specified, "
               "the list of current particles will be printed.\n"
-              "plot <deltaT> <iterations>:\tGenerates a plot of the current system, generating new "
+              "plot <deltaT> <iterations> <m>:\tGenerates a plot of the current system, generating new "
               "position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
-              "\t\t\t\t\t\t\tThe program runs for a total of <iterations> iterations (integer value).")
+              "\t\t\t\t\t\t\tThe program runs for a total of <iterations> iterations (integer value).\n"
+              "\t\t\t\t\t\t\t<m> is the method of updating used (either Euler or EulerCromer).")
     elif command[:3] == 'add':
         if command == 'add':
             print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
@@ -55,12 +56,14 @@ def run_cmd(command):
         if command == 'plot':
             print("Usage of 'plot <deltaT> <iterations>: Generates a plot of the current system, "
                   "generating new position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
-                  "The program runs for a total of <iterations> iterations (integer value).")
+                  "The program runs for a total of <iterations> iterations (integer value)."
+                  "<m> is the method of updating used (either Euler or EulerCromer).")
         elif command[:5] == 'plot ':
             args = command.split(" ")
             deltaT = float(args[1])
             iterations = int(args[2])
-            cmd.plot_system(deltaT, iterations, particles)
+            m = args[3]
+            cmd.plot_system(deltaT, iterations, m, particles)
             input("Plot complete, press the enter key to exit the program.\n")
             exit()
 

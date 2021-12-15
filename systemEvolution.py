@@ -1,6 +1,6 @@
 from Particle import *
 
-def evolve_posvel(particle, deltaT, N, particle_dict):
+def evolve_posvel(particle, deltaT, N, m, particle_dict):
     time = 0
 
     # Define new dictionary without original particle
@@ -17,7 +17,13 @@ def evolve_posvel(particle, deltaT, N, particle_dict):
         for object in dict_wo_particle.values():
             accel += particle.updateGravitationalAcceleration(object)
         particle.acceleration = accel
-        particle.update_euler(deltaT)
+
+        # Update based on chosen method
+        if m == "Euler":
+            particle.update_euler(deltaT)
+        elif m == "EulerCromer":
+            particle.update_eulerCromer(deltaT)
+
         time += deltaT
         x.append(particle.position[0])
         y.append(particle.position[1])

@@ -60,11 +60,11 @@ def del_particle(particle, particle_dict):
         print("Particle '" + particle + "' does not exist.")
 
 
-def plot_system(deltaT, N, particle_dict):
+def plot_system(deltaT, N, m, particle_dict):
     particle_dict_copy = particle_dict.copy()
     for particle in particle_dict.values():
         # print(str(particle.position) + "," + str(particle.velocity))  # test
-        x, y = evolve.evolve_posvel(particle, deltaT, N, particle_dict_copy)
+        x, y = evolve.evolve_posvel(particle, deltaT, N, m, particle_dict_copy)
         # print(particle.position + "," + particle.velocity)  # test
         plt.plot(x, y, label=particle.name)
     plt.legend()
