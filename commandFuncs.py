@@ -83,12 +83,27 @@ def plot_system(deltaT, N, m, particle_dict):
             x, y = evolve.evolve_posvel(particle, deltaT, m, particle_dict_copy)
             x_values[particle.name].append(x)
             y_values[particle.name].append(y)
-            particle_dict[particle.name] = particle
     for name in particle_dict.keys():
         plt.plot(x_values[name], y_values[name], label=name)
     plt.legend()
     plt.show()
 
+def plot_energy(deltaT, N, m, particle_dict, n):
+    time = 0
+    energies = []
+    times = []
+    for i in range(N):
+        particle_dict_copy = particle_dict.copy()
+        energy = 0
+        for particle in particle_dict.values():
+            energy += evolve.evolve_energy(particle, deltaT, m, particle_dict_copy)
+        time += deltaT
+        if N % n == 0:
+            energies.append(energy)
+            times.append(time)
+    plt.plot(times, energies, label="Total System Energy")
+    plt.legend()
+    plt.show()
 
 # Define masses
 mass = {
