@@ -49,4 +49,4 @@ def evolve_energy(particle, deltaT, m, particle_dict):
     energy = particle.kineticEnergy()
     for obj in dict_wo_particle.values():
         energy += particle.potentialEnergy(obj)
-    return energy
+    return particle, energy

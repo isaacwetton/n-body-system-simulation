@@ -97,7 +97,9 @@ def plot_energy(deltaT, N, m, particle_dict, n):
         particle_dict_copy = particle_dict.copy()
         energy = 0
         for particle in particle_dict.values():
-            energy += evolve.evolve_energy(particle, deltaT, m, particle_dict_copy)
+            evolved_particle, particle_energy = evolve.evolve_energy(particle, deltaT, m, particle_dict_copy)
+            energy += particle_energy
+            particle_dict[particle.name] = evolved_particle
         time += deltaT
         if N % n == 0:
             energies.append(energy)
