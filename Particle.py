@@ -32,14 +32,34 @@ class Particle:
             self.name, self.mass, self.position, self.velocity, self.acceleration
         )
 
-    def update(self, deltaT):
-        """Updates position and acceleration of the particle object after a time interval of deltaT"""
+    def update_euler(self, deltaT):
+        """
+        Updates position and acceleration of the particle object after a time interval of deltaT.
+
+        Uses the Euler method.
+        """
         # Update position
         for i in range(0, 3):
             self.position[i] = self.position[i] + (self.velocity[i] * deltaT)
         # Update velocity
         for i in range(0, 3):
             self.velocity[i] = self.velocity[i] + (self.acceleration[i] * deltaT)
+        # Create copies of position and velocity arrays to ensure that all entries are floats
+        self.position = np.array([self.position[0], self.position[1], self.position[2]], dtype=float)
+        self.velocity = np.array([self.velocity[0], self.velocity[1], self.velocity[2]], dtype=float)
+
+    def update_eulerCromer(self, deltaT):
+        """
+        Updates position and acceleration of the particle object after a time interval of deltaT.
+
+        Uses the Euler-Cromer method.
+        """
+        # Update velocity
+        for i in range(0, 3):
+            self.velocity[i] = self.velocity[i] + (self.acceleration[i] * deltaT)
+        # Update position
+        for i in range(0, 3):
+            self.position[i] = self.position[i] + (self.velocity[i] * deltaT)
         # Create copies of position and velocity arrays to ensure that all entries are floats
         self.position = np.array([self.position[0], self.position[1], self.position[2]], dtype=float)
         self.velocity = np.array([self.velocity[0], self.velocity[1], self.velocity[2]], dtype=float)
