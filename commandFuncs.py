@@ -80,9 +80,10 @@ def plot_system(deltaT, N, m, particle_dict):
     for i in range(N):
         particle_dict_copy = particle_dict.copy()
         for particle in particle_dict.values():
-            x, y = evolve.evolve_posvel(particle, deltaT, m, particle_dict_copy)
-            x_values[particle.name].append(x)
-            y_values[particle.name].append(y)
+            evolved_particle = evolve.evolve_posvel(particle, deltaT, m, particle_dict_copy)
+            x_values[particle.name].append(evolved_particle.position[0])
+            y_values[particle.name].append(evolved_particle.position[1])
+            particle_dict[particle.name] = evolved_particle
     for name in particle_dict.keys():
         plt.plot(x_values[name], y_values[name], label=name)
     plt.legend()

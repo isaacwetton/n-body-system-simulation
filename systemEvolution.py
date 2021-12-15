@@ -22,7 +22,7 @@ def evolve_posvel(particle, deltaT, m, particle_dict):
     elif m == "EulerCromer":
         particle.update_eulerCromer(deltaT)
 
-    return particle.position[0], particle.position[1]
+    return particle
 
 
 def evolve_energy(particle, deltaT, m, particle_dict):
