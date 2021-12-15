@@ -3,6 +3,8 @@ from Particle import *
 import numpy as np
 import commandFuncs as cmd
 from astropy.time import Time
+
+
 # from astropy.coordinates import get_body_barycentric_posvel
 # from spiceypy import sxform, mxvg
 # from poliastro import constants
@@ -49,8 +51,16 @@ def run_cmd(command):
             particle = command[4:]
             cmd.del_particle(particle, particles)
 
-    elif command == 'plot':
-        cmd.plot_system(10, 1000000, particles)
+    elif command[:4] == 'plot':
+        if command == 'plot':
+            print("Usage of 'plot <deltaT> <iterations>: Generates a plot of the current system, "
+                  "generating new position/velocity/acceleration at intervals of <deltaT> seconds (float value). "
+                  "The program runs for a total of <iterations> iterations (integer value).")
+        elif command[:5] == 'plot ':
+            args = command.split(" ")
+            deltaT = float(args[1])
+            iterations = int(args[2])
+            cmd.plot_system(deltaT, iterations, particles)
 
 # Define list of commands
 COMMANDS = ("help", "add", "del", "plot")
