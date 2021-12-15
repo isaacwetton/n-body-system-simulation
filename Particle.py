@@ -76,7 +76,8 @@ class Particle:
 
     def potentialEnergy(self, body):
         sep = np.linalg.norm(self.position - body.position)
-        return -(body.G * body.mass) / sep
+        return -(body.G * body.mass * self.mass) / sep
+
 
 # Console error message if script is run directly
 if __name__ == "__main__":
