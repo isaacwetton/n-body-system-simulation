@@ -54,13 +54,15 @@ def run_cmd(command):
     elif command[:4] == 'plot':
         if command == 'plot':
             print("Usage of 'plot <deltaT> <iterations>: Generates a plot of the current system, "
-                  "generating new position/velocity/acceleration at intervals of <deltaT> seconds (float value). "
+                  "generating new position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
                   "The program runs for a total of <iterations> iterations (integer value).")
         elif command[:5] == 'plot ':
             args = command.split(" ")
             deltaT = float(args[1])
             iterations = int(args[2])
             cmd.plot_system(deltaT, iterations, particles)
+            input("Plot complete, press the enter key to exit the program.\n")
+            exit()
 
 # Define list of commands
 COMMANDS = ("help", "add", "del", "plot")
