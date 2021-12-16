@@ -14,16 +14,21 @@ from astropy.time import Time
 def run_cmd(command):
     if command == 'help' or command[:5] == 'help ':
         print("The following is a list of valid commands with descriptions.\n\n"
-              "add <particle>:\t\t\t\tAdds the specified particle to the simulation. Valid particles are: "
+              "add <particle>:\t\t\t\t\tAdds the specified particle to the simulation. Valid particles are: "
               "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
-              "\t\t\t\t\t\t\tIf you specify the particle as 'custom', you can specify "
+              "\t\t\t\t\t\t\t\tIf you specify the particle as 'custom', you can specify "
               "mass, position and velocity for a custom particle.\n"
-              "del <particle>:\t\t\t\tDeletes an existing particle. If a particle is not specified, "
+              "del <particle>:\t\t\t\t\tDeletes an existing particle. If a particle is not specified, "
               "the list of current particles will be printed.\n"
-              "plot <deltaT> <iterations> <m>:\tGenerates a plot of the current system, generating new "
+              "plot <deltaT> <iterations> <m>:\t\tGenerates a plot of the current system, generating new "
               "position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
-              "\t\t\t\t\t\t\tThe program runs for a total of <iterations> iterations (integer value).\n"
-              "\t\t\t\t\t\t\t<m> is the method of updating used (either Euler or EulerCromer).")
+              "\t\t\t\t\t\t\t\tThe program runs for a total of <iterations> iterations (integer value).\n"
+              "\t\t\t\t\t\t\t\t<m> is the method of updating used (either Euler or EulerCromer).\n"
+              "energyplot <deltaT> <iterations> <m> <n>:\t\tGenerates a plot of the system energy, evolving the system "
+              "every <deltaT> seconds (float value)\n"
+              "\t\t\t\t\t\t\t\tand running for <iterations> iterations (integer value).\n"
+              "\t\t\t\t\t\t\t\t<m> is the method of updating used (either Euler or EulerCromer).\n"
+              "\t\t\t\t\t\t\t\tA new plot point is generated every <n> iterations.\n")
     elif command[:3] == 'add':
         if command == 'add':
             print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
@@ -54,7 +59,7 @@ def run_cmd(command):
 
     elif command[:4] == 'plot':
         if command == 'plot':
-            print("Usage of 'plot <deltaT> <iterations>: Generates a plot of the current system, "
+            print("Usage of 'plot <deltaT> <iterations> <m>: Generates a plot of the current system, "
                   "generating new position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
                   "The program runs for a total of <iterations> iterations (integer value)."
                   "<m> is the method of updating used (either Euler or EulerCromer).")
@@ -67,8 +72,26 @@ def run_cmd(command):
             input("Plot complete, press the enter key to exit the program.\n")
             exit()
 
+    elif command[:10] == 'energyplot':
+        if command == 'energyplot':
+            print("Usage of 'energyplot <deltaT> <iterations> <m> <n>': Generates a plot of the system energy, "
+                  "evolving the system every <deltaT> seconds (float value)\n"
+                  "and running for <iterations> iterations (integer value).\n"
+                  "<m> is the method of updating used (either Euler or EulerCromer).\n"
+                  "A new plot point is generated every <n> iterations.\n")
+        elif command[:11] == 'energyplot ':
+            args = command.split(" ")
+            deltaT = float(args[1])
+            iterations = int(args[2])
+            m = args[3]
+            n = int(args[4])
+            cmd.plot_energy(deltaT, iterations, m, particles, n)
+            input("Plot complete, press the enter key to exit the program.\n")
+            exit()
+
+
 # Define list of commands
-COMMANDS = ("help", "add", "del", "plot")
+COMMANDS = ("help", "add", "del", "plot", "energyplot")
 
 # Define original time (constant)
 T0 = Time("2021-11-28 00:00:00.0", scale="tdb")
@@ -82,8 +105,9 @@ earth = cmd.add_particle('earth', T0)
 particles['sun'] = sun
 particles['earth'] = earth
 
-cmd.add_particle('mercury', T0)  # test
-cmd.plot_energy(200, 1000000, "EulerCromer", particles, 500)  # test
+# cmd.add_particle('mercury', T0)  # test
+# cmd.plot_energy(500, 100000, "EulerCromer", particles, 500)  # test
+
 # Print welcome message
 print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
       "The program initially has the Sun and Earth as the only objects.\n"
@@ -95,7 +119,7 @@ command = input("")
 
 # Check for valid command
 while command != "exit":
-    while command[:4] not in COMMANDS and command[:3] not in COMMANDS:
+    while command[:4] not in COMMANDS and command[:3] not in COMMANDS and command[:10] not in COMMANDS:
         if command == "exit":
             break
         print("That is not a valid command. Type 'help' for a list of commands.")
