@@ -115,6 +115,7 @@ def plot_momentum(deltaT, N, m, particle_dict, n):
     x_moms = []
     y_moms = []
     z_moms = []
+    total_moms = []
     times = []
     for i in range(N):
         particle_dict_copy = particle_dict.copy()
@@ -126,16 +127,19 @@ def plot_momentum(deltaT, N, m, particle_dict, n):
             x_mom = particle_momentum[0]
             y_mom = particle_momentum[1]
             z_mom = particle_momentum[2]
+            total_mom = np.linalg.norm(particle_momentum)
             particle_dict[particle.name] = evolved_particle
         time += deltaT
         if N % n == 0:
             x_moms.append(x_mom)
             y_moms.append(y_mom)
             z_moms.append(z_mom)
+            total_moms.append(total_mom)
             times.append(time)
     plt.plot(times, x_moms, label="Total x momentum")
     plt.plot(times, y_moms, label="Total y momentum")
     plt.plot(times, z_moms, label="Total z momentum")
+    plt.plot(times, total_moms, label="Total system momentum (absolute)")
     plt.legend()
     plt.show()
 

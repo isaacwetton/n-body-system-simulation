@@ -106,7 +106,7 @@ particles['sun'] = sun
 particles['earth'] = earth
 
 # cmd.add_particle('mercury', T0)  # test
-# cmd.plot_energy(500, 100000, "EulerCromer", particles, 500)  # test
+# cmd.plot_momentum(500, 100000, "EulerCromer", particles, 500)  # test
 
 # Print welcome message
 print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
