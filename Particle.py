@@ -78,6 +78,11 @@ class Particle:
         sep = np.linalg.norm(self.position - body.position)
         return (body.G * body.mass * self.mass) / sep
 
+    def momentum(self):
+        x_mom = self.mass * self.velocity[0]
+        y_mom = self.mass * self.velocity[1]
+        z_mom = self.mass * self.velocity[2]
+        return [x_mom, y_mom, z_mom]
 
 # Console error message if script is run directly
 if __name__ == "__main__":

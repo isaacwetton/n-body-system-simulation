@@ -89,6 +89,7 @@ def plot_system(deltaT, N, m, particle_dict):
     plt.legend()
     plt.show()
 
+
 def plot_energy(deltaT, N, m, particle_dict, n):
     time = 0
     energies = []
@@ -108,6 +109,35 @@ def plot_energy(deltaT, N, m, particle_dict, n):
     plt.legend()
     plt.show()
 
+
+def plot_momentum(deltaT, N, m, particle_dict, n):
+    time = 0
+    x_moms = []
+    y_moms = []
+    z_moms = []
+    times = []
+    for i in range(N):
+        particle_dict_copy = particle_dict.copy()
+        x_mom = 0
+        y_mom = 0
+        z_mom = 0
+        for particle in particle_dict.values():
+            evolved_particle, particle_momentum = evolve.evolve_momentum(particle, deltaT, m, particle_dict_copy)
+            x_mom = particle_momentum[0]
+            y_mom = particle_momentum[1]
+            z_mom = particle_momentum[2]
+            particle_dict[particle.name] = evolved_particle
+        time += deltaT
+        if N % n == 0:
+            x_moms.append(x_mom)
+            y_moms.append(y_mom)
+            z_moms.append(z_mom)
+            times.append(time)
+    plt.plot(times, x_moms, label="Total x momentum")
+    plt.plot(times, y_moms, label="Total y momentum")
+    plt.plot(times, z_moms, label="Total z momentum")
+    plt.legend()
+    plt.show()
 
 # Define masses
 mass = {
