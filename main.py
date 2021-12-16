@@ -82,7 +82,8 @@ earth = cmd.add_particle('earth', T0)
 particles['sun'] = sun
 particles['earth'] = earth
 
-cmd.plot_energy(100, 50000, "EulerCromer", particles, 500) # test
+cmd.add_particle('mercury', T0)  # test
+cmd.plot_energy(200, 1000000, "EulerCromer", particles, 500)  # test
 # Print welcome message
 print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
       "The program initially has the Sun and Earth as the only objects.\n"

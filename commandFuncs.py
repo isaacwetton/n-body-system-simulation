@@ -104,7 +104,7 @@ def plot_energy(deltaT, N, m, particle_dict, n):
         if N % n == 0:
             energies.append(energy)
             times.append(time)
-    plt.plot(times, energies, label="Total System Energy", marker="o")
+    plt.plot(times, energies, label="Total System Energy")
     plt.legend()
     plt.show()
 
