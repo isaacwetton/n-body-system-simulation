@@ -12,6 +12,12 @@ from astropy.time import Time
 
 
 def run_cmd(command):
+    """
+    Takes a user-inputted command string and executes the relevant function from commandFuncs.py.
+    Seperates additional arguments if necessary and passes them to the executed function.
+
+    :param command: Command string that the user has inputted (previously validated to be a correct command)
+    """
     if command == 'help' or command[:5] == 'help ':
         print("The following is a list of valid commands with descriptions.\n\n"
               "add <particle>:\t\t\t\t\tAdds the specified particle to the simulation. Valid particles are: "
