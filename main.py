@@ -12,6 +12,7 @@ def run_cmd(command):
     :param command: Command string that the user has inputted (previously validated to be a correct command)
     """
     if command == 'help' or command[:5] == 'help ':
+        # Print help information with info on command usage
         print("The following is a list of valid commands with descriptions.\n\n"
               "add <particle>:\t\t\t\t\tAdds the specified particle to the simulation. Valid particles are: "
               "sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, pluto\n"
@@ -35,48 +36,58 @@ def run_cmd(command):
               "\t\t\t\t\t\t\t\tA new plot point is generated every <n> iterations.\n"
               )
     elif command[:3] == 'add':
+        # if command does not specify parameters, give info on usage
         if command == 'add':
             print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
                   "sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto\n"
                   "If you specify the particle as 'custom', you can specify "
                   "mass, position and velocity for a custom particle.")
         elif command[:4] == 'add ':
-            particle = command[4:]
+            particle = command[4:]  # Get particle name
+            # Validate that particle is valid
             if particle in ('sun', 'mercury', 'venus', 'earth', 'mars',
                             'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'custom'):
+                # Create particle and output success message
                 particle_obj = cmd.add_particle(particle, T0)
                 particles[particle_obj.name] = particle_obj
                 print("Particle '" + particle_obj.name + "' added successfully")
             else:
+                # Return error message if particle is invalid
                 print("Invalid particle.")
                 print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
                       "sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto\n"
                       "If you specify the particle as 'custom', you can specify "
                       "mass, position and velocity for a custom particle.")
     elif command[:3] == 'del':
+        # if command does not specify parameters, give info on usage
         if command == 'del':
             print("Usage of 'del <particle>': Deletes an existing particle. If a particle is not specified, "
                   "the list of current particles will be printed.")
         elif command[:4] == 'del ':
+            # Delete chosen particle
             particle = command[4:]
             cmd.del_particle(particle, particles)
 
     elif command[:4] == 'plot':
+        # if command does not specify parameters, give info on usage
         if command == 'plot':
             print("Usage of 'plot <deltaT> <iterations> <m>: Generates a plot of the current system, "
                   "generating new position/velocity/acceleration at intervals of <deltaT> seconds (float value).\n"
                   "The program runs for a total of <iterations> iterations (integer value)."
                   "<m> is the method of updating used (either Euler or EulerCromer).")
         elif command[:5] == 'plot ':
+            # Split the inputted arguments into a list
             args = command.split(" ")
             deltaT = float(args[1])
             iterations = int(args[2])
             m = args[3]
+            # Call function to plot the system then output success message
             cmd.plot_system(deltaT, iterations, m, particles)
             input("Plot complete, press the enter key to exit the program.\n")
             exit()
 
     elif command[:10] == 'energyplot':
+        # if command does not specify parameters, give info on usage
         if command == 'energyplot':
             print("Usage of 'energyplot <deltaT> <iterations> <m> <n>': Generates a plot of the system energy, "
                   "evolving the system every <deltaT> seconds (float value)\n"
@@ -84,16 +95,19 @@ def run_cmd(command):
                   "<m> is the method of updating used (either Euler or EulerCromer).\n"
                   "A new plot point is generated every <n> iterations.\n")
         elif command[:11] == 'energyplot ':
+            # Split the inputted arguments into a list
             args = command.split(" ")
             deltaT = float(args[1])
             iterations = int(args[2])
             m = args[3]
             n = int(args[4])
+            # Call function to plot the energy then output success message
             cmd.plot_energy(deltaT, iterations, m, particles, n)
             input("Plot complete, press the enter key to exit the program.\n")
             exit()
 
     elif command[:12] == 'momentumplot':
+        # if command does not specify parameters, give info on usage
         if command == 'momentumplot':
             print("Usage of 'momentum <deltaT> <iterations> <m> <n>': Generates a plot of the system momentum, "
                   "evolving the system every <deltaT> seconds (float value)\n"
@@ -101,11 +115,13 @@ def run_cmd(command):
                   "<m> is the method of updating used (either Euler or EulerCromer).\n"
                   "A new plot point is generated every <n> iterations.\n")
         elif command[:13] == 'momentumplot ':
+            # Split inputted arguments into a list
             args = command.split(" ")
             deltaT = float(args[1])
             iterations = int(args[2])
             m = args[3]
             n = int(args[4])
+            # Call function to plot the momentum then output success message
             cmd.plot_momentum(deltaT, iterations, m, particles, n)
             input("Plot complete, press the enter key to exit the program.\n")
             exit()
@@ -135,7 +151,7 @@ print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"
 # Wait for user input
 command = input("")
 
-# Check for valid command
+# Check for valid command, ask user again if invalid
 while command != "exit":
     while command[:4] not in COMMANDS and command[:3] not in COMMANDS \
             and command[:10] not in COMMANDS and command[:12] not in COMMANDS:

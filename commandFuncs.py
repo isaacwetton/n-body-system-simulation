@@ -43,6 +43,7 @@ def add_particle(particle, t):
         # retrieve correct mass
         particle_mass = mass[particle]
     elif particle == 'custom':
+        # Ask user for the custom particle's attributes
         print('What is the name of the object?')
         particle = input('')
         while particle in ('sun', 'mercury', 'venus', 'earth', 'mars',
@@ -57,6 +58,7 @@ def add_particle(particle, t):
         print('What is the initial velocity vector (in form x,y,z)?')
         vel_str = input('').split(',')
         vel = [float(vel_str[0]), float(vel_str[1]), float(vel_str[2])]
+    # Return desired particle object
     return Particle(name=particle, mass=particle_mass, position=pos, velocity=vel)
 
 
@@ -94,11 +96,13 @@ def plot_system(deltaT, N, m, particle_dict):
 
     for i in range(N):
         particle_dict_copy = particle_dict.copy()
+        # Evolve each particle and append x and y values to list
         for particle in particle_dict.values():
             evolved_particle = evolve.evolve_posvel(particle, deltaT, m, particle_dict_copy)
             x_values[particle.name].append(evolved_particle.position[0])
             y_values[particle.name].append(evolved_particle.position[1])
             particle_dict[particle.name] = evolved_particle
+    # Plot each particle's position
     for name in particle_dict.keys():
         plt.plot(x_values[name], y_values[name], label=name)
     plt.xlabel("x position")
@@ -132,6 +136,7 @@ def plot_energy(deltaT, N, m, particle_dict, n):
         if N % n == 0:
             energies.append(energy)
             times.append(time)
+    # Plot total energy against time
     plt.plot(times, energies, label="Total System Energy")
     plt.xlabel("Time (s)")
     plt.ylabel("Energy (J)")
@@ -176,6 +181,7 @@ def plot_momentum(deltaT, N, m, particle_dict, n):
             z_moms.append(z_mom)
             total_moms.append(total_mom)
             times.append(time)
+    # Plot x, y, z, and absolute total momentums against time
     plt.plot(times, x_moms, label="Total x momentum")
     plt.plot(times, y_moms, label="Total y momentum")
     plt.plot(times, z_moms, label="Total z momentum")
