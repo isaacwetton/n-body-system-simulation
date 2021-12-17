@@ -41,7 +41,6 @@ def run_cmd(command):
                 particle_obj = cmd.add_particle(particle, T0)
                 particles[particle_obj.name] = particle_obj
                 print("Particle '" + particle_obj.name + "' added successfully")
-                print(particles)  # test
             else:
                 print("Invalid particle.")
                 print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
