@@ -1,5 +1,4 @@
 from Particle import *
-from astropy.time import Time
 from astropy.coordinates import get_body_barycentric_posvel
 from spiceypy import sxform, mxvg
 from poliastro import constants
@@ -8,6 +7,15 @@ import systemEvolution as evolve
 from matplotlib import pyplot as plt
 
 def add_particle(particle, t):
+    """
+    Adds a new particle from a pre-defined list, including the ability to add custom particles
+
+    :param particle: The name of the particle to add. Can be the name of a planet in the solar system or 'custom'
+                     to create a custom particle. (string)
+    :param t: The time at which to retrieve ephemeris data for. (astropy Time object)
+
+    :return: A Particle.py Particle object that corresponds with the inputted particle parameter.
+    """
     if particle in ('sun', 'mercury', 'venus', 'earth', 'mars',
                     'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'):
         # Retrieve initial position and velocity
@@ -53,6 +61,13 @@ def add_particle(particle, t):
 
 
 def del_particle(particle, particle_dict):
+    """
+    Deletes a currently existing particle
+
+    :param particle: The name of the particle that is to be deleted (string)
+    :param particle_dict: The dictionary of current particles (dict)
+    """
+
     if particle in particle_dict.keys():
         particle_dict.pop(particle, None)
         print("Particle '" + particle + "' successfully deleted.")
@@ -61,14 +76,14 @@ def del_particle(particle, particle_dict):
 
 
 def plot_system(deltaT, N, m, particle_dict):
-    # particle_dict_copy = particle_dict.copy()
-    # for particle in particle_dict.values():
-    #     # print(str(particle.position) + "," + str(particle.velocity))  # test
-    #     x, y = evolve.evolve_posvel(particle, deltaT, N, m, particle_dict_copy)
-    #     # print(particle.position + "," + particle.velocity)  # test
-    #     plt.plot(x, y, label=particle.name)
-    # plt.legend()
-    # plt.show()
+    """
+    Collects data for and generates a plot of position for current particles in the system.
+
+    :param deltaT: The time step between system evolutions (float)
+    :param N: The number of system evolutions (integer)
+    :param m: The method of updating to use ('Euler' or 'EulerCromer') (string)
+    :param particle_dict: The dictionary of current particles (dict)
+    """
 
     # Initialise Dictionaries
     x_values = {}
@@ -91,6 +106,16 @@ def plot_system(deltaT, N, m, particle_dict):
 
 
 def plot_energy(deltaT, N, m, particle_dict, n):
+    """
+    Collects data for and generates a plot of total system energy against time
+
+    :param deltaT: The time step between system evolutions (float)
+    :param N: The number of system evolutions (integer)
+    :param m: The method of updating to use ('Euler' or 'EulerCromer') (string)
+    :param particle_dict: The dictionary of current particles (dict)
+    :param n: Data points are collected every n evolutions (integer)
+    """
+
     time = 0
     energies = []
     times = []
@@ -111,6 +136,17 @@ def plot_energy(deltaT, N, m, particle_dict, n):
 
 
 def plot_momentum(deltaT, N, m, particle_dict, n):
+    """
+    Collects data for and generates a plot of total system momentum against time.
+    Total momentum is given as an absolute value.
+    The individual x, y, z momentums are also plotted.
+
+    :param deltaT: The time step between system evolutions (float)
+    :param N: The number of system evolutions (integer)
+    :param m: The method of updating to use ('Euler' or 'EulerCromer') (string)
+    :param particle_dict: The dictionary of current particles (dict)
+    :param n: Data points are collected every n evolutions (integer)
+    """
     time = 0
     x_moms = []
     y_moms = []

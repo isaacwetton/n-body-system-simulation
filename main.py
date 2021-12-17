@@ -1,14 +1,7 @@
 # Import modules, constants and functions
 from Particle import *
-import numpy as np
 import commandFuncs as cmd
 from astropy.time import Time
-
-
-# from astropy.coordinates import get_body_barycentric_posvel
-# from spiceypy import sxform, mxvg
-# from poliastro import constants
-# from astropy.constants import G
 
 
 def run_cmd(command):
@@ -110,9 +103,6 @@ sun = cmd.add_particle('sun', T0)
 earth = cmd.add_particle('earth', T0)
 particles['sun'] = sun
 particles['earth'] = earth
-
-# cmd.add_particle('mercury', T0)  # test
-# cmd.plot_momentum(500, 100000, "EulerCromer", particles, 500)  # test
 
 # Print welcome message
 print("Welcome to this n-body gravity simulation by Isaac Wetton.\n\n"

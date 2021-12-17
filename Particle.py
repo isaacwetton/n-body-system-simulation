@@ -37,6 +37,8 @@ class Particle:
         Updates position and acceleration of the particle object after a time interval of deltaT.
 
         Uses the Euler method.
+
+        :param deltaT: The time step for which to update the system
         """
         # Update position
         for i in range(0, 3):
@@ -53,6 +55,8 @@ class Particle:
         Updates position and acceleration of the particle object after a time interval of deltaT.
 
         Uses the Euler-Cromer method.
+
+        :param deltaT: The time step for which to update the system
         """
         # Update velocity
         for i in range(0, 3):
@@ -65,6 +69,14 @@ class Particle:
         self.velocity = np.array([self.velocity[0], self.velocity[1], self.velocity[2]], dtype=float)
 
     def updateGravitationalAcceleration(self, body):
+        """
+        Calculates the gravitational acceleration of a body due to another body
+
+        :param body: The second body, which causes the acceleration (Particle.py Particle object)
+
+        :return: The value of the acceleration due to body
+        """
+
         sep = np.linalg.norm(self.position - body.position)
         normalised_sep = (self.position - body.position) / sep
         grav_accel_mag = -(body.G * body.mass) / (sep**2)
@@ -72,17 +84,35 @@ class Particle:
         return grav_accel
 
     def kineticEnergy(self):
+        """
+        Calculates the kinetic energy of the particle
+
+        :return: The value of the particle's kinetic energy
+        """
         return 0.5 * self.mass * (np.linalg.norm(self.velocity))**2
 
     def potentialEnergy(self, body):
+        """
+        Calculates the gravitational potential energy of the particle due to a second body
+
+        :param body: The second body causing the potential energy (Particle.py Particle object)
+
+        :return: The value of the potential energy
+        """
         sep = np.linalg.norm(self.position - body.position)
         return (body.G * body.mass * self.mass) / sep
 
     def momentum(self):
+        """
+        Calculates the total momentum of the particle
+
+        :return: A list of x, y, z momentums
+        """
         x_mom = self.mass * self.velocity[0]
         y_mom = self.mass * self.velocity[1]
         z_mom = self.mass * self.velocity[2]
         return [x_mom, y_mom, z_mom]
+
 
 # Console error message if script is run directly
 if __name__ == "__main__":

@@ -86,7 +86,7 @@ def evolve_momentum(particle, deltaT, m, particle_dict):
     :return: A copy of the particle object with updated position, velocity and acceleration
              The momentum vector of the particle after updating
     """
-    
+
     # Define new dictionary without original particle
 
     dict_wo_particle = {}
@@ -108,6 +108,7 @@ def evolve_momentum(particle, deltaT, m, particle_dict):
     # Calculate x, y, z momentum of particle
     momentum = particle.momentum()
     return particle, momentum
+
 
 # Console error message if script is run directly
 if __name__ == "__main__":
