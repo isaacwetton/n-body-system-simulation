@@ -27,7 +27,13 @@ def run_cmd(command):
               "every <deltaT> seconds (float value)\n"
               "\t\t\t\t\t\t\t\tand running for <iterations> iterations (integer value).\n"
               "\t\t\t\t\t\t\t\t<m> is the method of updating used (either Euler or EulerCromer).\n"
-              "\t\t\t\t\t\t\t\tA new plot point is generated every <n> iterations.\n")
+              "\t\t\t\t\t\t\t\tA new plot point is generated every <n> iterations.\n"
+              "momentumplot <deltaT> <iterations> <m> <n>:\t\tGenerates a plot of the system momentum"
+              ", evolving the system every <deltaT> seconds (float value)\n"
+              "\t\t\t\t\t\t\t\tand running for <iterations> iterations (integer value).\n"
+              "\t\t\t\t\t\t\t\t<m> is the method of updating used (either Euler or EulerCromer).\n"
+              "\t\t\t\t\t\t\t\tA new plot point is generated every <n> iterations.\n"
+              )
     elif command[:3] == 'add':
         if command == 'add':
             print("Usage of 'add <particle>': Adds the specified particle to the simulation. Valid particles are: "
@@ -87,9 +93,26 @@ def run_cmd(command):
             input("Plot complete, press the enter key to exit the program.\n")
             exit()
 
+    elif command[:12] == 'momentumplot':
+        if command == 'momentumplot':
+            print("Usage of 'momentum <deltaT> <iterations> <m> <n>': Generates a plot of the system momentum, "
+                  "evolving the system every <deltaT> seconds (float value)\n"
+                  "and running for <iterations> iterations (integer value).\n"
+                  "<m> is the method of updating used (either Euler or EulerCromer).\n"
+                  "A new plot point is generated every <n> iterations.\n")
+        elif command[:13] == 'momentumplot ':
+            args = command.split(" ")
+            deltaT = float(args[1])
+            iterations = int(args[2])
+            m = args[3]
+            n = int(args[4])
+            cmd.plot_momentum(deltaT, iterations, m, particles, n)
+            input("Plot complete, press the enter key to exit the program.\n")
+            exit()
+
 
 # Define list of commands
-COMMANDS = ("help", "add", "del", "plot", "energyplot")
+COMMANDS = ("help", "add", "del", "plot", "energyplot", "momentumplot")
 
 # Define original time (constant)
 T0 = Time("2021-11-28 00:00:00.0", scale="tdb")
@@ -114,7 +137,8 @@ command = input("")
 
 # Check for valid command
 while command != "exit":
-    while command[:4] not in COMMANDS and command[:3] not in COMMANDS and command[:10] not in COMMANDS:
+    while command[:4] not in COMMANDS and command[:3] not in COMMANDS \
+            and command[:10] not in COMMANDS and command[:12] not in COMMANDS:
         if command == "exit":
             break
         print("That is not a valid command. Type 'help' for a list of commands.")
