@@ -103,7 +103,7 @@ def plot_system(deltaT, N, m, particle_dict):
         plt.plot(x_values[name], y_values[name], label=name)
     plt.xlabel("x position")
     plt.ylabel("y position")
-    plt.legend()
+    plt.legend(loc="upper right")
     plt.show()
 
 
@@ -133,7 +133,9 @@ def plot_energy(deltaT, N, m, particle_dict, n):
             energies.append(energy)
             times.append(time)
     plt.plot(times, energies, label="Total System Energy")
-    plt.legend()
+    plt.xlabel("Time (s)")
+    plt.ylabel("Energy (J)")
+    plt.legend(loc="upper right")
     plt.show()
 
 
@@ -178,7 +180,9 @@ def plot_momentum(deltaT, N, m, particle_dict, n):
     plt.plot(times, y_moms, label="Total y momentum")
     plt.plot(times, z_moms, label="Total z momentum")
     plt.plot(times, total_moms, label="Total system momentum (absolute)")
-    plt.legend()
+    plt.xlabel("Time (s)")
+    plt.ylabel("Momentum (m.kg.s^-1)")
+    plt.legend(loc="upper right")
     plt.show()
 
 # Define masses

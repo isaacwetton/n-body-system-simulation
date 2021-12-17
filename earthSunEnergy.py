@@ -1,4 +1,4 @@
-# TEST FILE TO TEST THE PRODUCTION OF AN EARTH-SUN POSITION PLOT
+# TEST FILE TO TEST THE PRODUCTION OF AN EARTH-SUN TOTAL SYSTEM ENERGY
 
 import commandFuncs as cmd
 from astropy.time import Time
@@ -15,5 +15,5 @@ earth = cmd.add_particle('earth', T0)
 particles['sun'] = sun
 particles['earth'] = earth
 
-# Create plot of orbits
-cmd.plot_system(200, 500000, 'EulerCromer', particles)
+# Plot the total system energy against time
+cmd.plot_energy(200, 500000, 'EulerCromer', particles, 500)

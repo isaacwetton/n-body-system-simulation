@@ -15,5 +15,9 @@ earth = cmd.add_particle('earth', T0)
 particles['sun'] = sun
 particles['earth'] = earth
 
+# Add Mars
+mars = cmd.add_particle('mars', T0)
+particles['mars'] = mars
+
 # Create plot of orbits
 cmd.plot_system(200, 500000, 'EulerCromer', particles)
