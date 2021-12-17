@@ -101,6 +101,8 @@ def plot_system(deltaT, N, m, particle_dict):
             particle_dict[particle.name] = evolved_particle
     for name in particle_dict.keys():
         plt.plot(x_values[name], y_values[name], label=name)
+    plt.xlabel("x position")
+    plt.ylabel("y position")
     plt.legend()
     plt.show()
 
